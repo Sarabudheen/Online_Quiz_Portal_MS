@@ -76,11 +76,15 @@ public class QuizService {
 		return true;
 	}
 	
-	public boolean deleteQuiz(Long quizId) throws Exception {
+	public boolean deleteQuiz(Long quizId) {
 		repo.deleteById(quizId);
 		return true;
 	}
 	
+	public boolean updateQuiz(Questions quiz) {
+		repo.save(quiz);
+		return true;
+	}
 	public List<Questions> getAllQuizzes() {
 		Iterator<Questions> it =  repo.findAll().iterator();
 		List<Questions> list = new ArrayList<Questions>();
@@ -92,7 +96,7 @@ public class QuizService {
 		return list;
 	}
 
-	public Questions getQuizById(Long quizId) throws Exception {
+	public Questions getQuizById(Long quizId) {
 		Questions quiz = repo.findById(quizId).get();
 		return quiz;
 	}

@@ -26,20 +26,17 @@ public class TopicService {
 		return true;
 	}
 	
-	public boolean deleteTopics(Long topicId) throws Exception {
+	public boolean update(Topics topic) {
+		repo.save(topic);
+		return true;
+	}
+	
+	
+	public boolean deleteTopics(Long topicId) {
 		repo.deleteById(topicId);
 		return true;
 	}
 	
-//	public Topics getTopicById(Long topicId) throws Exception{
-//		System.out.println("Topic id requested from the user is "+topicId);
-//		Optional<Topics> topic = repo.findById(topicId);
-//		if(topic == null) {
-//			throw new Exception("Topic not found exception");
-//		}
-//		System.out.println("Topic Details "+topic.getTopicId()+" "+topic.getTopicName());
-//		return topic;
-//	}
 	
 	public List<Topics> getAllTopics() {
 		Iterator<Topics> it =  repo.findAll().iterator();
@@ -52,8 +49,8 @@ public class TopicService {
 		return list;
 	}
 
-	public Optional<Topics> getTopicById(Long topicId) throws Exception {
-		Optional<Topics> topic = repo.findById(topicId);
+	public Topics getTopicById(Long topicId) {
+		Topics topic = repo.findById(topicId).get();
 		return topic;
 	}
 }

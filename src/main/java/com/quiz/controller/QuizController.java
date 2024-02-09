@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -24,6 +25,7 @@ import com.quiz.service.QuizService;
 
 @RestController
 @RequestMapping("/quiz")
+@CrossOrigin("http://localhost:4200/")
 public class QuizController {
 
 	
@@ -41,10 +43,14 @@ public class QuizController {
 		 }return ResponseEntity.ok("File uploaded successfully");
 	}
 	
+	@PutMapping("/updateQuiz")
+	public void performUpdateQuiz(@RequestBody Questions quiz) {
+		service.updateQuiz(quiz);
+	}
+
 	@DeleteMapping("/deleteQuiz/{quizId}")
-	public String performDeleteQuiz(@PathVariable("quizId") long quizId) throws Exception {
+	public void performDeleteQuiz(@PathVariable("quizId") long quizId) throws Exception {
 		service.deleteQuiz(quizId);
-		return "Quiz Deleted Succefully";
 	}
 	
 	@GetMapping("/getQuiz/{quizId}")

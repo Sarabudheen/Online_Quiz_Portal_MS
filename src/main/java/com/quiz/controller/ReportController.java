@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,28 +20,37 @@ import com.quiz.service.ReportService;
 
 @RestController
 @RequestMapping("/reports")
+@CrossOrigin("http://localhost:4200/")
 public class ReportController {
 	@Autowired
 	ReportService service;
 	
 	@PostMapping("/addReport")
-	public String performAddReport(@RequestBody Report report) {
+	public void performAddReport(@RequestBody Report report) {
 		service.addReport(report);
-		return "Report added successfully";
 	}
 	
+	@PutMapping("/updateReport")
+	public void performUpdateReport(@RequestBody Report report) {
+		service.addReport(report);
+	}
 	@DeleteMapping("/deleteReport/{reportId}")
-	public String performDeleteReport(@PathVariable("reportId") long reportId) throws Exception {
+	public void performDeleteReport(@PathVariable("reportId") long reportId) throws Exception {
 		service.deleteReport(reportId);
-		return "Report Deleted Succefully";
 	}
 	
 	@GetMapping("/getReportDetail/{reportId}")
-	public Optional<Report> performGetReportById(@PathVariable("reportId") Long reportId) throws Exception{
-		Optional<Report> report = service.getReportById(reportId);
+	public Report performGetReportById(@PathVariable("reportId") Long reportId) throws Exception{
+		Report report = service.getReportById(reportId);
 		return report;
 	}
 
+	@GetMapping("/getReportDetailByUserId/{userId}")
+	public Report performGetReportByUserId(@PathVariable("userId") Long userId) throws Exception{
+		Report report = service.getReportByUserId(userId);
+		return report;
+	}
+	
 	@GetMapping("/getAllReportDetails")
 	public List<Report> performGetAllUsers() {
 		List<Report> list = service.getAllReport();

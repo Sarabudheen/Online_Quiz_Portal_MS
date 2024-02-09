@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,11 @@ public class UserController {
 	public ResponseEntity<?> performLogin(@RequestBody Users user) {
 		Login res=service.login(user);
 			return ResponseEntity.ok(res);
+	}
+	
+	@PutMapping("/updateUser")
+	public void performUpdateUser(@RequestBody Users user) {
+		service.updateUser(user);
 	}
 
 	@DeleteMapping("/deleteUser/{userId}")

@@ -55,7 +55,11 @@ public class UserService {
 		
 	}	
 	
-	public boolean deleteUser(Long userId) throws Exception {
+	public boolean updateUser(Users user) {
+		repo.save(user);
+		return true;
+	}
+	public boolean deleteUser(Long userId) {
 		repo.deleteById(userId);
 		return true;
 	}
@@ -71,7 +75,7 @@ public class UserService {
 		return list;
 	}
 
-	public Users getUserById(Long userId) throws Exception {
+	public Users getUserById(Long userId){
 		Users user = repo.findById(userId).get();
 		return user;
 	}

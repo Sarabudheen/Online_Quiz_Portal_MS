@@ -22,8 +22,14 @@ public class ReportService {
 		repo.save(report);
 		return true;
 	}
+	
+	public boolean updateReport(Report report) {
+		repo.save(report);
+		return true;
+	}
 
-	public boolean deleteReport(Long reportId) throws Exception {
+
+	public boolean deleteReport(Long reportId) {
 		repo.deleteById(reportId);
 		return true;
 	}
@@ -39,8 +45,13 @@ public class ReportService {
 		return list;
 	}
 
-	public Optional<Report> getReportById(Long reportId) throws Exception {
-		Optional<Report> report = repo.findById(reportId);
+	public Report getReportById(Long reportId) throws Exception {
+		Report report = repo.findById(reportId).get();
+		return report;
+	}
+	
+	public Report getReportByUserId(Long userId) throws Exception {
+		Report report = repo.getReportByUserId(userId);
 		return report;
 	}
 }

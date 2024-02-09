@@ -19,8 +19,8 @@ public class Report {
 	@Column(name = "User_Id")
 	private long userId;
 	
-	@Column(name = "Topic_Id")
-	private long topicId;
+	@Column(name = "Topic_Name")
+	private String topicName;
 	
 	@Column(name = "Score")
 	private long score;
@@ -36,18 +36,12 @@ public class Report {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @param reportId
-	 * @param userId
-	 * @param topicId
-	 * @param score
-	 * @param feedBack
-	 */
-	public Report(long reportId, long userId, long topicId, long score, String feedBack) {
+
+	public Report(long reportId, long userId, String topicName, long score, String feedBack) {
 		super();
 		this.reportId = reportId;
 		this.userId = userId;
-		this.topicId = topicId;
+		this.topicName = topicName;
 		this.score = score;
 		this.feedBack = feedBack;
 	}
@@ -68,12 +62,12 @@ public class Report {
 		this.userId = userId;
 	}
 
-	public long getTopicId() {
-		return topicId;
+	public String getTopicName() {
+		return topicName;
 	}
 
-	public void setTopicId(long topicId) {
-		this.topicId = topicId;
+	public void setTopicName(String topicName) {
+		this.topicName = topicName;
 	}
 
 	public long getScore() {
